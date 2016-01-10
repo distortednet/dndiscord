@@ -1,0 +1,22 @@
+var config = {};
+config.server = '122111299713892354';
+config.botchannel = '127132045972471808';
+
+config.botemail = "bla@whateva.com"; //discord bot password
+config.botpassword = "discordpass"; //discord bot email
+config.rethinkhost = 'localhost';
+config.rethinkport = '28015';
+config.rethinkdb = 'discord';
+
+var thinky = require('thinky')({host: config.rethinkhost,port: config.rethinkport,db: config.rethinkdb});
+var r = thinky.r,type = thinky.type;
+
+config.rethinkschema =  {
+	sender: type.string(),
+	senderid: type.number(),
+	messageid: type.number(),
+	date: type.date(),
+	channel:  type.string(),
+	channelid:  type.number()
+};
+module.exports = config;
