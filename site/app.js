@@ -76,6 +76,6 @@ app.get('*', function(req, res, next) {
 	res.render('404');
 });
 
-var server = app.listen(8080, function() {
-	console.log('listening on:' + 8080);
+var server = app.listen(config.webport, function() {
+	console.log('listening on:' + config.webport);
 });

@@ -6,6 +6,7 @@ config.rethinkdb = 'discord';
 config.twitchcid = '45edrfgkjoftkyh'; //twitch app client ID
 config.twitchsecret = 'fgkhlj4ohfh'; //twitch app secret
 config.baseurl = 'http://localhost:8080';
+config.webport = 8080;
 
 config.botmods = [
 	"distortednet",
