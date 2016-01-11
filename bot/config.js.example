@@ -2,7 +2,7 @@ var config = {};
 config.server = '122111299713892354';
 config.botchannel = '127132045972471808';
 
-config.botemail = "bla@whateva.com"; //discord bot password
+config.botemail = "bla@whatevaaa.com"; //discord bot password
 config.botpassword = "discordpass"; //discord bot email
 config.rethinkhost = 'localhost';
 config.rethinkport = '28015';
