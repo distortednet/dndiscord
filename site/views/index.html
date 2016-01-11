@@ -1,70 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title></title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="/js/materialize.min.js"></script>
-<link rel="stylesheet" href="/css/materialize.min.css" media="screen" title="no title" charset="utf-8">
-<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<style>
-.condensed tr td {
-    padding: 0px;
-}
-#userlist {
-  border: 1px solid red !important;
-}
-</style>
+    <meta charset="utf-8">
+
+    <title></title>
+
+    <link rel="stylesheet" href="/css/materialize.min.css" media="screen" title="no title" charset="utf-8">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/materialize.min.js"></script>
+
+    <style type="text/css">
+        .condensed tr td {
+            padding: 0px;
+        }
+        #userlist {
+          border: 1px solid red !important;
+        }
+    </style>
 </head>
 <body>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col s4">&nbsp;</div> <!-- the frontend dev lords would smite me for this. -->
-    <div class="col s4">
-      <select id="userlist">
-        <option selected="selected" disabled="disabled">Select a user</option>
-        {%for user in chatters%}<option value="{{user}}">{{user.sender}}</option>{%endfor%}
-      </select>
-      <form class="" action="/" method="get">
-        <input type="text" name="sender" id="sender" placeholder="search by username">
-        <input type="text" name="message" placeholder="search by word or text string">
-        <input type="submit" value="Submit">
-      </form>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col s4">&nbsp;</div> <!-- the frontend dev lords would smite me for this. -->
+            <div class="col s4">
+                <select id="userlist">
+                    <option selected="selected" disabled="disabled">Select a user</option>
+                    {%for user in chatters%}<option value="{{user}}">{{user.sender}}</option>{%endfor%}
+                </select>
+                <form class="" action="/" method="get">
+                    <input type="text" name="sender" id="sender" placeholder="search by username" />
+                    <input type="text" name="message" placeholder="search by word or text string" />
+                    <input type="submit" value="Submit" />
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                {%if alert%} <center>{{alert}}</center> {%endif%}
+                <hr />
+                <table class="bordered striped condensed">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Username</th>
+                            <th>Message</th>
+                            <th>Channel</th>
+                            <th>UUID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {%for userlog in data%}
+                    <tr>
+                        <td>{{userlog.date|date('M-d-Y')}} <br /> {{userlog.date|date('h:i:s A')}}</td>
+                        <td>{{userlog.sender}}</td>
+                        <td>{{userlog.message}}</td>
+                        <td>{{userlog.channel}}</td>
+                        <td>{{userlog.senderid}}</td>
+                    </tr>
+                    {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col s12">
-      {%if alert%} <center>{{alert}}</center> {%endif%}
-        <hr>
-      <table class="bordered striped condensed">
-        <thead>
-          <tr><th>Time</th><th>Username</th><th>Message</th><th>Channel</th><th>UUID</th></tr>
-        </thead>
-        <tbody>
-          {%for userlog in data%}
-          <tr>
-            <td>{{userlog.date|date('M-d-Y')}} <br> {{userlog.date|date('h:i:s A')}}</td>
-            <td>{{userlog.sender}}</td>
-            <td>{{userlog.message}}</td>
-            <td>{{userlog.channel}}</td>
-            <td>{{userlog.senderid}}</td>
-          </tr>
-          {%endfor%}
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#userlist').material_select();
+            $('#userlist').change(function () {
+                var opt = $(this).children('option:selected').text();
+
+                $('#sender').hide(0, function () {
+                    $('#sender').val(opt);
+                });
+            });
+        });
+    </script>
 </body>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('#userlist').material_select();
-    $("#userlist").change(function(){
-     opt = $(this).children("option:selected").text();
-     $("#sender").hide(0, function() {
-        $("#sender").val(opt);
-     });
-    });
-  });
-</script>
 </html>
