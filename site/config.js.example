@@ -9,31 +9,37 @@ config.baseurl = 'http://localhost:8080';
 config.webport = 8080;
 
 config.botmods = [
-	"distortednet",
-	"boomliam",
-	"tarfu",
-	"bigpace",
-	"mellownebula",
-	"heep123",
-	"conceptional",
-	"laagone",
-	"decicus",
-	"zcotticus",
-	"moorlly",
-	"flawsom",
-	"shado_temple",
-	"sargasm_gaming"
+    "distortednet",
+    "boomliam",
+    "tarfu",
+    "bigpace",
+    "mellownebula",
+    "heep123",
+    "conceptional",
+    "laagone",
+    "decicus",
+    "zcotticus",
+    "moorlly",
+    "flawsom",
+    "shado_temple",
+    "sargasm_gaming",
 ];
 
-var thinky = require('thinky')({host: config.rethinkhost,port: config.rethinkport,db: config.rethinkdb});
-var r = thinky.r,type = thinky.type;
+var thinky = require('thinky')({
+    host: config.rethinkhost,
+    port: config.rethinkport,
+    db: config.rethinkdb,
+});
+var r = thinky.r;
+var type = thinky.type;
 
 config.rethinkschema =  {
-	sender: type.string(),
-	senderid: type.number(),
-	messageid: type.number(),
-	date:  type.date(),
-	channel:  type.string(),
-	channelid:  type.number()
+    sender: type.string(),
+    senderid: type.number(),
+    messageid: type.number(),
+    date:  type.date(),
+    channel:  type.string(),
+    channelid:  type.number(),
 };
+
 module.exports = config;
